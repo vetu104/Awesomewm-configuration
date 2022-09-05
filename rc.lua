@@ -56,16 +56,18 @@ screen.connect_signal("request::wallpaper", function(s)
     awful.wallpaper {
         screen = s,
         widget = {
-            {
-                image     = beautiful.wallpaper,
-                upscale   = true,
-                downscale = true,
-                widget    = wibox.widget.imagebox,
-            },
+            horizontal_fit_policy = "fit",
+            vertical_fit_policy = "fit",
+            image     = beautiful.wallpaper,
+            --upscale   = true,
+            --downscale = true,
+            widget    = wibox.widget.imagebox
+            --[[
             valign = "center",
             halign = "center",
             tiled  = false,
             widget = wibox.container.tile,
+            --]]
         }
     }
 end)
@@ -351,7 +353,8 @@ ruled.client.connect_signal("request::rules", function()
             class = {
                 "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv",
                 "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer",
-                "Galculator", "Thunar", "tsmapplication.exe", "Gedit"
+                "Galculator", "Thunar", "tsmapplication.exe", "Gedit",
+                "mpv", "io.github.celluloid_player.Celluloid"
             },
             name = {
                 "Event Tester",  -- xev.
@@ -383,6 +386,7 @@ ruled.client.connect_signal("request::rules", function()
             class = {
                 "wowclassic.exe",
                 "wow.exe",
+                "etl",
                 "Civ6Sub"
             },
             name = { "^DayZ$" }
@@ -423,6 +427,11 @@ ruled.client.connect_signal("request::rules", function()
         id = "util",
         rule_any   = { class = { "tsmapplication.exe" }},
         properties = { screen = 1, tag = "7" }
+    }
+    -- Some clients don't want titlebars
+    ruled.client.append_rule {
+        rule_any = { class = { "Steam", "firefox" }},
+        properties = { titlebars_enabled = false }
     }
 end)
 

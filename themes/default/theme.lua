@@ -6,30 +6,45 @@ local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
 local dpi = xresources.apply_dpi
+--local xrdb = xresources.get_current_theme()
 
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_xdg_config_home() .. "awesome/themes/"
+local wallpapers_path = gfs.get_xdg_data_home() .. "wallpapers/"
 
 local theme = {}
 
 theme.font          = "sans 8"
-
+--[[
+-- default "theme.lua"
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
-
 theme.fg_normal     = "#aaaaaa"
 theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
+--]]
 
-theme.useless_gap         = dpi(0)
-theme.border_width        = dpi(1)
+theme.fg_normal  = "#fcfae8"
+theme.fg_focus   = "#F0DFAF"
+theme.fg_urgent  = "#CC9393"
+theme.fg_minimize = "#ffffff"
+
+theme.bg_normal  = "#3F3F3F"
+theme.bg_focus   = "#1E2320"
+theme.bg_urgent  = "#b74822"
+theme.bg_systray = "#000000"
+theme.bg_minimize = "#6d6d6d"
+
 theme.border_color_normal = "#000000"
 theme.border_color_active = "#535d6c"
 theme.border_color_marked = "#91231c"
+
+theme.useless_gap         = dpi(10)
+theme.border_width        = dpi(0)
 
 -- There are other variable sets
 -- overriding the default one when
@@ -97,7 +112,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path.."default/background.png"
+theme.wallpaper = gfs.get_random_file_from_dir(wallpapers_path, { "jpg", "png" }, true)
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
