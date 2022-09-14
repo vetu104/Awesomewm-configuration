@@ -7,6 +7,9 @@ local naughty = require("naughty")
 local ruled = require("ruled")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
+local lain = require("lain")
+
+local dpi = beautiful.xresources.apply_dpi
 
 -- {{{ Error handling
 naughty.connect_signal("request::display_error", function(message, startup)
@@ -73,9 +76,36 @@ screen.connect_signal("request::wallpaper", function(s)
 end)
 -- }}}
 
+--require("bar")
+local theme = beautiful.get()
+local separators = lain.util.separators
+local arrow = separators.arrow_left
+
+-- cputemp widget
+local temp = lain.widget.temp({
+    format = "%.0f",
+    settings = function()
+        widget:set_markup("cpu: "..coretemp_now.."c")
+    end
+})
+-- nvidiatemp widget
+local nvtemp = lain.widget.contrib.nvtemp({
+    settings = function()
+        widget:set_markup("gpu: "..nvtemp_now.."c")
+    end
+})
+-- clock widget
+    local clock = wibox.widget.textclock("%d/%m %H:%M")
+-- loadavg widget
+local loadavg = lain.widget.sysload({
+    settings = function()
+        widget:set_markup(load_1.." "..load_5.." "..load_15)
+    end
+})
+
+
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table. (NOT!)
     if s.index == 1 then
@@ -135,8 +165,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
             awful.button({ }, 5, function() awful.client.focus.byidx( 1) end),
         }
     }
+
     -- Create the wibox
-    s.mywibox = awful.wibar {
+    s.mywibox = awful.wibar({
         position = "top",
         screen   = s,
         widget   = {
@@ -148,14 +179,29 @@ screen.connect_signal("request::desktop_decoration", function(s)
             s.mytasklist, -- Middle widget
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
+                arrow(theme.bg_normal, "#343434"),
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, temp.widget, layout = wibox.layout.align.horizontal
+                }), dpi(4), dpi(4)), "#343434"),
+                arrow("#343434", theme.bg_focus),
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, nvtemp.widget, layout = wibox.layout.align.horizontal
+                }), dpi(3), dpi(6)), theme.bg_focus),
+                arrow(theme.bg_focus, "#343434"),
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, loadavg.widget, layout = wibox.layout.align.horizontal
+                }), dpi(4), dpi(4)), "#343434"),
+                arrow("#343434", theme.bg_focus),
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, clock, layout = wibox.layout.align.horizontal
+                }), dpi(3), dpi(6)), theme.bg_focus),
+                --arrow("#343434", theme.bg_normal),
                 wibox.widget.systray(),
-                mytextclock,
                 s.mylayoutbox,
             },
         }
-    }
+    })
 end)
--- }}}
 
 -- {{{ Key bindings
 -- General Awesome keys
@@ -354,7 +400,7 @@ ruled.client.connect_signal("request::rules", function()
                 "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv",
                 "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer",
                 "Galculator", "Thunar", "tsmapplication.exe", "Gedit",
-                "mpv", "io.github.celluloid_player.Celluloid"
+                "mpv", "io.github.celluloid_player.Celluloid", "feh"
             },
             name = {
                 "Event Tester",  -- xev.
@@ -387,7 +433,8 @@ ruled.client.connect_signal("request::rules", function()
                 "wowclassic.exe",
                 "wow.exe",
                 "etl",
-                "Civ6Sub"
+                "Civ6Sub",
+                "csgo_linux64"
             },
             name = { "^DayZ$" }
         },
@@ -430,7 +477,14 @@ ruled.client.connect_signal("request::rules", function()
     }
     -- Some clients don't want titlebars
     ruled.client.append_rule {
-        rule_any = { class = { "Steam", "firefox" }},
+        rule_any = {
+            class = {
+                "Steam",
+                "firefox",
+                "battle.net.exe",
+                "io.github.celluloid_player.Celluloid"
+            }
+        },
         properties = { titlebars_enabled = false }
     }
 end)

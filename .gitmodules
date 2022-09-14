@@ -1,0 +1,3 @@
+[submodule "lain"]
+	path = lain
+	url = https://github.com/vetu104/lain.git
