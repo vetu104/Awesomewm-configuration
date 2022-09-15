@@ -6,10 +6,10 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local ruled = require("ruled")
 require("awful.hotkeys_popup.keys")
-local lain = require("lain")
+--local lain = require("lain")
 local keys = require("keys")
 
-local dpi = beautiful.xresources.apply_dpi
+--local dpi = beautiful.xresources.apply_dpi
 
 -- {{{ Error handling
 naughty.connect_signal("request::display_error", function(message, startup)
@@ -67,6 +67,7 @@ screen.connect_signal("request::wallpaper", function(s)
 end)
 -- }}}
 
+--[[
 local theme = beautiful.get()
 local separators = lain.util.separators
 local arrow = separators.arrow_left
@@ -92,6 +93,7 @@ local loadavg = lain.widget.sysload({
         widget:set_markup(load_1.." "..load_5.." "..load_15)
     end
 })
+--]]
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -110,6 +112,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             layout = awful.layout.layouts[1]
         })
     end
+    --[[
     -- Layout indicator, for each screen
     s.mylayoutbox = awful.widget.layoutbox({
         screen  = s,
@@ -162,7 +165,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
             },
         }
     })
+    --]]
 end)
+
+require("bar")
 
 --- {{{ Set keybindings and mousebuttons
 root.keys(keys.globalkeys)
