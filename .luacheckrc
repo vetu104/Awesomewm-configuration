@@ -48,13 +48,13 @@ globals = {
     "terminal",
     "editor",
     "editor_cmd",
-    "modkey",
     "mytextclock",
     "widget",
     "load_1",
     "load_5",
     "load_15",
-    "coretemp_now"
+    "coretemp_now",
+    "nvtemp_now"
 }
 
 -- Enable cache (uses .luacheckcache relative to this rc file).
