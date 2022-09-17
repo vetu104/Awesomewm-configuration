@@ -111,8 +111,7 @@ ruled.client.connect_signal("request::rules", function()
             raise     = true,
             screen    = awful.screen.preferred,
             placement = awful.placement.no_overlap+awful.placement.no_offscreen
-        },
-        callback = awful.client.setslave,
+        }
     }
     -- Floating clients.
     ruled.client.append_rule {
@@ -164,7 +163,7 @@ ruled.client.connect_signal("request::rules", function()
         properties = {
             screen = 1,
             tag = "2",
-            fullscreen = true,
+            --fullscreen = true,
             titlebars_enabled = false
         }
     }
