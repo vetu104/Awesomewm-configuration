@@ -8,8 +8,9 @@ local ruled = require("ruled")
 require("awful.hotkeys_popup.keys")
 --local lain = require("lain")
 local keys = require("keys")
+local widget = require("widget")
 
---local dpi = beautiful.xresources.apply_dpi
+local dpi = beautiful.xresources.apply_dpi
 
 -- {{{ Error handling
 naughty.connect_signal("request::display_error", function(message, startup)
@@ -85,9 +86,71 @@ screen.connect_signal("request::desktop_decoration", function(s)
             layout = awful.layout.layouts[1]
         })
     end
+    s.mylayoutbox = awful.widget.layoutbox({
+        screen  = s,
+        buttons = keys.layoutindicatorbuttons
+    })
+    -- Create a taglist widget
+    s.mytaglist = awful.widget.taglist({
+        screen  = s,
+        filter  = awful.widget.taglist.filter.all,
+        buttons = keys.taglistbuttons
+    })
+    -- Create a tasklist widget
+    s.mytasklist = awful.widget.tasklist({
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = keys.tasklistbuttons
+    })
+    -- Create the wibox
+    s.mywibox = awful.wibar({
+        position = "top",
+        screen   = s,
+        widget   = {
+            layout = wibox.layout.align.horizontal,
+            { -- Left widgets
+                layout = wibox.layout.fixed.horizontal,
+                s.mytaglist,
+            },
+            s.mytasklist, -- Middle widget
+            { -- Right widgets
+                layout = wibox.layout.fixed.horizontal,
+                --arrow(theme.bg_normal, "#343434"),
+                wibox.container.margin(widget.cputemp, dpi(4), dpi(4)),
+                --[[
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, widg.cputemp, layout = wibox.layout.align.horizontal
+                }), dpi(4), dpi(4)), "#343434"),
+                --]]
+                --arrow("#343434", theme.bg_focus),
+                wibox.container.margin(widget.gputemp, dpi(4), dpi(4)),
+                --[[
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, widg.gputemp, layout = wibox.layout.align.horizontal
+                }), dpi(3), dpi(6)), theme.bg_focus),
+                --]]
+                --arrow(theme.bg_focus, "#343434"),
+                wibox.container.margin(widget.sysload, dpi(4), dpi(4)),
+                --[[
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, widg.sysload, layout = wibox.layout.align.horizontal
+                }), dpi(4), dpi(4)), "#343434"),
+                --]]
+                --arrow("#343434", theme.bg_focus),
+                wibox.container.margin(widget.clock, dpi(4), dpi(4)),
+                --[[
+                wibox.container.background(wibox.container.margin(wibox.widget({
+                    nil, widg.clock, layout = wibox.layout.align.horizontal
+                }), dpi(3), dpi(6)), theme.bg_focus),
+                --]]
+                --arrow("#343434", theme.bg_normal),
+                wibox.widget.systray(),
+                s.mylayoutbox,
+            },
+        }
+    })
 end)
 
-require("bar")
 --}}
 
 --- {{{ Set keybindings and mousebuttons
