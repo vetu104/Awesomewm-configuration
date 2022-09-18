@@ -1,11 +1,10 @@
 local awful = require("awful")
-local gt = require("gears.table")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 local _M = {}
 local modkey = "Mod4"
 
-_M.globalkeys = gt.join(
+_M.globalkeys = {
     -- General
     awful.key({ modkey              },          "s",            hotkeys_popup.show_help,
             { description = "show help", group = "awesome" }),
@@ -125,9 +124,9 @@ _M.globalkeys = gt.join(
             end
         end
     })
-)
+}
 
-_M.clientkeys = gt.join(
+_M.clientkeys = {
     awful.key({ modkey              },          "f",            function(c)
         c.fullscreen = not c.fullscreen
         c:raise()
@@ -158,9 +157,9 @@ _M.clientkeys = gt.join(
         c.maximized_horizontal = not c.maximized_horizontal; c:raise()
     end,
             { description = "(un)maximize horizontally", group = "client" })
-)
+}
 
-_M.clientbuttons = gt.join(
+_M.clientbuttons = {
     awful.button({}, 1, function(c)
         c:activate({ context = "mouse_click" })
     end),
@@ -170,9 +169,9 @@ _M.clientbuttons = gt.join(
     awful.button({ modkey }, 3, function(c)
         c:activate({ context = "mouse_click", action = "mouse_resize"})
     end)
-)
+}
 
-_M.taglistbuttons = gt.join(
+_M.taglistbuttons = {
     awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ modkey }, 1, function(t)
         if client.focus then
@@ -187,21 +186,22 @@ _M.taglistbuttons = gt.join(
     end),
     awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
     awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end)
-)
+}
 
-_M.layoutindicatorbuttons = gt.join(
+_M.layoutindicatorbuttons = {
     awful.button({ }, 1, function() awful.layout.inc( 1) end),
     awful.button({ }, 3, function() awful.layout.inc(-1) end),
     awful.button({ }, 4, function() awful.layout.inc(-1) end),
     awful.button({ }, 5, function() awful.layout.inc( 1) end)
-)
+}
 
-_M.tasklistbuttons = gt.join(
+_M.tasklistbuttons = {
     awful.button({ }, 1, function(c)
         c:activate({ context = "tasklist", action = "toggle_minimization" })
     end),
     awful.button({ }, 3, function() awful.menu.client_list({ theme = { width = 250 } }) end),
     awful.button({ }, 4, function() awful.client.focus.byidx(-1) end),
     awful.button({ }, 5, function() awful.client.focus.byidx( 1) end)
-)
+}
+
 return _M
