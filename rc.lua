@@ -8,6 +8,7 @@ local ruled = require("ruled")
 require("awful.hotkeys_popup.keys")
 --local lain = require("lain")
 local keys = require("keys")
+local rules = require("rules")
 local widget = require("widget")
 
 local dpi = beautiful.xresources.apply_dpi
@@ -163,116 +164,7 @@ client.connect_signal("request::default_mousebindings", function()
 end)
 --- }}}
 
--- {{{ Rules
-ruled.client.connect_signal("request::rules", function()
-    -- All clients will match this rule.
-    ruled.client.append_rule {
-        id         = "global",
-        rule       = {},
-        properties = {
-            focus     = awful.client.focus.filter,
-            raise     = true,
-            screen    = awful.screen.preferred,
-            placement = awful.placement.no_overlap+awful.placement.no_offscreen
-        }
-    }
-    -- Floating clients.
-    ruled.client.append_rule {
-        id       = "floating",
-        rule_any = {
-            instance = { "copyq", "pinentry" },
-            class = {
-                "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv",
-                "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer",
-                "Galculator", "Thunar", "tsmapplication.exe", "Gedit",
-                "mpv", "io.github.celluloid_player.Celluloid", "feh"
-            },
-            name = {
-                "Event Tester",  -- xev.
-                "^Friends*", -- steam friends
-                "DayZ Launcher"
-            },
-            role = {
-                "AlarmWindow",    -- Thunderbird's calendar.
-                "ConfigManager",  -- Thunderbird's about:config.
-                "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
-                "Organizer"      -- Firefox history, bookmark etc.. windows
-            }
-        },
-        properties = { floating = true }
-    }
-
-    -- Add titlebars to normal clients and dialogs
-    ruled.client.append_rule {
-        id = "titlebars",
-        rule_any = { type = { "normal", "dialog" }},
-        properties = { titlebars_enabled = true }
-    }
-
-    -- Bind clients to tags
-    -- Game
-    ruled.client.append_rule {
-        id = "game",
-        rule_any = {
-            class = {
-                "wowclassic.exe",
-                "wow.exe",
-                "etl",
-                "Civ6Sub",
-                "csgo_linux64"
-            },
-            name = { "^DayZ$" }
-        },
-        properties = {
-            screen = 1,
-            tag = "2",
-            --fullscreen = true,
-            titlebars_enabled = false
-        }
-    }
-    -- Chat
-    ruled.client.append_rule {
-        id = "chat",
-        rule_any = { class = { "discord" }},
-        properties = { screen = 1, tag = "3" }
-    }
-    -- Music
-    ruled.client.append_rule {
-        id = "music",
-        rule_any   = { class = { "Spotify" }},
-        properties = { screen = 1, tag = "4" }
-    }
-    -- Launcher
-    ruled.client.append_rule {
-        id = "launcher",
-        rule_any   = { class = { "Steam", "battle.net.exe" }},
-        properties = { screen = 1, tag = "5" }
-    }
-    -- Tools
-    ruled.client.append_rule {
-        id = "tools",
-        rule_any   = { class = { "obs" }},
-        properties = { screen = 1, tag = "6" }
-    }
-    -- Util
-    ruled.client.append_rule {
-        id = "util",
-        rule_any   = { class = { "tsmapplication.exe" }},
-        properties = { screen = 1, tag = "7" }
-    }
-    -- Some clients don't want titlebars
-    ruled.client.append_rule {
-        rule_any = {
-            class = {
-                "Steam",
-                "firefox",
-                "battle.net.exe",
-                "io.github.celluloid_player.Celluloid"
-            }
-        },
-        properties = { titlebars_enabled = false }
-    }
-end)
+ruled.client.append_rules(rules)
 
 -- Detect clients that spawn without a class
 client.connect_signal("request::manage", function(c)
@@ -296,7 +188,6 @@ client.connect_signal("request::manage", function(c)
         end)
     end
 end)
--- }}}
 
 -- {{{ Titlebars
 -- Add a titlebar if titlebars_enabled is set to true in the rules.

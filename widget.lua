@@ -1,5 +1,6 @@
 local awfulw = require("awful.widget")
 local wiboxw = require("wibox.widget")
+--local match, format = string.match, string.format
 
 local _M = {}
 
@@ -10,8 +11,11 @@ _M.clock = wiboxw.textclock("%d/%m %H:%M")
 
 -- Cpu temperature wibar widget
 _M.cputemp = awfulw.watch(
-    "sh -c 'sensors -u'", interval, function(widget, stdout)
+    "sensors -u", interval, function(widget, stdout)
+        -- We will assume that the first temp1_input entry is the cpu temp
         local out = stdout.match(stdout, "temp1_input: (%d+)%.")
+        -- Apparently the stdout object has string operation methods, string.foo not needed
+        -- out = format("cpu: %dc", out)
         out = out.format("cpu: %dc", out)
         widget:set_text(out)
     end
