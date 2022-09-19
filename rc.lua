@@ -7,9 +7,9 @@ local naughty = require("naughty")
 local ruled = require("ruled")
 require("awful.hotkeys_popup.keys")
 --local lain = require("lain")
-local keys = require("keys")
-local rules = require("rules")
-local widget = require("widget")
+local keys = require("keys") --custom
+local rules = require("rules") --custom
+local widget = require("widget") --custom
 
 local dpi = beautiful.xresources.apply_dpi
 
@@ -154,7 +154,7 @@ end)
 
 --}}
 
---- {{{ Set keybindings and mousebuttons
+--- {{{ Set keybindings and mousebuttons (keys.lua)
 awful.keyboard.append_global_keybindings(keys.globalkeys)
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings(keys.clientkeys)
@@ -164,7 +164,11 @@ client.connect_signal("request::default_mousebindings", function()
 end)
 --- }}}
 
-ruled.client.append_rules(rules)
+--- {{{ Set client rules (rules.lua)
+ruled.client.connect_signal("request::rules", function()
+    ruled.client.append_rules(rules)
+end)
+--- }}}
 
 -- Detect clients that spawn without a class
 client.connect_signal("request::manage", function(c)
