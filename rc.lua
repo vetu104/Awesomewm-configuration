@@ -75,14 +75,14 @@ end)
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table. (NOT!)
     if s.index == 1 then
-        awful.tag({ "1", "2", "3", "4", "5", "6", "7" }, s, awful.layout.layouts[1])
+        awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8" }, s, awful.layout.layouts[1])
     elseif s.index == 2 then
-        awful.tag.add("8", {
+        awful.tag.add("9", {
             screen = s,
             layout = awful.layout.layouts[1],
             selected = true
         })
-        awful.tag.add("9", {
+        awful.tag.add("10", {
             screen = s,
             layout = awful.layout.layouts[1]
         })

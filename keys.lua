@@ -84,6 +84,7 @@ _M.globalkeys = {
         description = "only view tag",
         group       = "tag",
         on_press    = function(index)
+            if index == 0 then index = 10 end
             local tag = root.tags()[index]
             local screen = tag.screen
             if tag then
@@ -100,6 +101,7 @@ _M.globalkeys = {
         description = "toggle tag",
         group       = "tag",
         on_press    = function(index)
+            if index == 0 then index = 10 end
             local tag = root.tags()[index]
             if tag then
                 awful.tag.viewtoggle(tag)
@@ -112,6 +114,7 @@ _M.globalkeys = {
         description = "move focused client to tag",
         group       = "tag",
         on_press    = function(index)
+            if index == 0 then index = 10 end
             if client.focus then
                 local tag = root.tags()[index]
                 if tag then
