@@ -7,6 +7,7 @@ run() {
   fi
 }
 
+run "nvidia-settings -l --config=~/.config/nvidia/settings"
 run "picom"
 run "xfce4-power-manager"
 run "numlockx"

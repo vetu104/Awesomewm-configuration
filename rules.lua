@@ -1,4 +1,5 @@
 local awful = require("awful")
+local gtr = require("gears.timer")
 
 local _M = {
     {
@@ -9,6 +10,23 @@ local _M = {
             raise     = true,
             screen    = awful.screen.preferred,
             placement = awful.placement.no_overlap+awful.placement.no_offscreen }
+    },
+    {
+        id = "titlebars_on",
+        rule_any = { type = { "normal", "dialog" }},
+        properties = { titlebars_enabled = true }
+    },
+    {
+        id = "titlebars_off",
+        rule_any = {
+            class = {
+                "Steam",
+                "firefox",
+                "battle.net.exe",
+                "io.github.celluloid_player.Celluloid"
+            }
+        },
+        properties = { titlebars_enabled = false }
     },
     {
         id       = "floating",
@@ -35,18 +53,12 @@ local _M = {
         properties = { floating = true }
     },
     {
-        id = "titlebars",
-        rule_any = { type = { "normal", "dialog" }},
-        properties = { titlebars_enabled = true }
-    },
-    {
-        id = "game",
+        id = "game_general",
         rule_any = {
             class = {
                 "wowclassic.exe",
                 "wow.exe",
                 "etl",
-                "Civ6Sub",
                 "csgo_linux64"
             },
             name = { "^DayZ$" }
@@ -54,7 +66,27 @@ local _M = {
         properties = {
             screen = 1,
             tag = "2",
-            --fullscreen = true,
+            titlebars_enabled = false
+        },
+        -- When a client starts up in fullscreen, resize it to cover the fullscreen a short moment later
+        -- Fixes wrong geometry when titlebars are enabled
+        -- (c) https://github.com/elenapan/
+        callback = function(c)
+            gtr.delayed_call(function()
+                if c.valid then
+                    c:geometry(c.screen.geometry)
+                end
+            end)
+        end
+    },
+    {
+        id = "game_civ6",
+        rule = { class = "Civ6Sub" },
+        properties = {
+            screen = 1,
+            tag = "2",
+            fullscreen = false,
+            floating = false,
             titlebars_enabled = false
         }
     },
@@ -83,17 +115,6 @@ local _M = {
         rule_any   = { class = { "tsmapplication.exe" }},
         properties = { screen = 1, tag = "7" }
     },
-    {
-        rule_any = {
-            class = {
-                "Steam",
-                "firefox",
-                "battle.net.exe",
-                "io.github.celluloid_player.Celluloid"
-            }
-        },
-        properties = { titlebars_enabled = false }
-    }
 }
 
 return _M

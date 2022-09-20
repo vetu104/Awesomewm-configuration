@@ -168,9 +168,9 @@ end)
 ruled.client.connect_signal("request::rules", function()
     ruled.client.append_rules(rules)
 end)
---- }}}
 
 -- Detect clients that spawn without a class
+-- (c) https://github.com/elenapan
 client.connect_signal("request::manage", function(c)
     if not c.class then
         c.minimized = true
@@ -180,18 +180,8 @@ client.connect_signal("request::manage", function(c)
         end)
     end
 end)
+--- }}}
 
--- When a client starts up in fullscreen, resize it to cover the fullscreen a short moment later
--- Fixes wrong geometry when titlebars are enabled
-client.connect_signal("request::manage", function(c)
-    if c.fullscreen then
-        gears.timer.delayed_call(function()
-            if c.valid then
-                c:geometry(c.screen.geometry)
-            end
-        end)
-    end
-end)
 
 -- {{{ Titlebars
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
@@ -234,21 +224,21 @@ end)
 -- {{{ Notifications
 ruled.notification.connect_signal('request::rules', function()
     -- All notifications will match this rule.
-    ruled.notification.append_rule {
+    ruled.notification.append_rule({
         rule       = { },
         properties = {
             screen           = awful.screen.preferred,
             implicit_timeout = 5,
         }
-    }
+    })
 end)
 
 naughty.connect_signal("request::display", function(n)
-    naughty.layout.box { notification = n }
+    naughty.layout.box({ notification = n })
 end)
 -- }}}
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
-    c:activate { context = "mouse_enter", raise = false }
+    c:activate({ context = "mouse_enter", raise = false })
 end)
