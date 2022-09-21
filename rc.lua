@@ -116,35 +116,11 @@ screen.connect_signal("request::desktop_decoration", function(s)
             s.mytasklist, -- Middle widget
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-                --arrow(theme.bg_normal, "#343434"),
+                wibox.container.margin(widget.diskfree, dpi(4), dpi(4)),
                 wibox.container.margin(widget.cputemp, dpi(4), dpi(4)),
-                --[[
-                wibox.container.background(wibox.container.margin(wibox.widget({
-                    nil, widg.cputemp, layout = wibox.layout.align.horizontal
-                }), dpi(4), dpi(4)), "#343434"),
-                --]]
-                --arrow("#343434", theme.bg_focus),
                 wibox.container.margin(widget.gputemp, dpi(4), dpi(4)),
-                --[[
-                wibox.container.background(wibox.container.margin(wibox.widget({
-                    nil, widg.gputemp, layout = wibox.layout.align.horizontal
-                }), dpi(3), dpi(6)), theme.bg_focus),
-                --]]
-                --arrow(theme.bg_focus, "#343434"),
                 wibox.container.margin(widget.sysload, dpi(4), dpi(4)),
-                --[[
-                wibox.container.background(wibox.container.margin(wibox.widget({
-                    nil, widg.sysload, layout = wibox.layout.align.horizontal
-                }), dpi(4), dpi(4)), "#343434"),
-                --]]
-                --arrow("#343434", theme.bg_focus),
                 wibox.container.margin(widget.clock, dpi(4), dpi(4)),
-                --[[
-                wibox.container.background(wibox.container.margin(wibox.widget({
-                    nil, widg.clock, layout = wibox.layout.align.horizontal
-                }), dpi(3), dpi(6)), theme.bg_focus),
-                --]]
-                --arrow("#343434", theme.bg_normal),
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },
