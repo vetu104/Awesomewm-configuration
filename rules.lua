@@ -23,7 +23,9 @@ local _M = {
                 "Steam",
                 "firefox",
                 "battle.net.exe",
-                "io.github.celluloid_player.Celluloid"
+                "io.github.celluloid_player.Celluloid",
+                "origin.exe",
+
             }
         },
         properties = { titlebars_enabled = false }
@@ -36,7 +38,7 @@ local _M = {
                 "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv",
                 "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer",
                 "Galculator", "Thunar", "tsmapplication.exe", "Gedit",
-                "mpv", "io.github.celluloid_player.Celluloid", "feh"
+                "mpv", "io.github.celluloid_player.Celluloid", "feh", "Xarchiver", "origin.exe"
             },
             name = {
                 "Event Tester",  -- xev.
@@ -50,7 +52,10 @@ local _M = {
                 "Organizer"      -- Firefox history, bookmark etc.. windows
             }
         },
-        properties = { floating = true }
+        properties = {
+            floating = true,
+            placement = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen
+        }
     },
     {
         id = "game_general",
@@ -102,7 +107,11 @@ local _M = {
     },
     {
         id = "launcher",
-        rule_any   = { class = { "Steam", "battle.net.exe" }},
+        rule_any   = { class = {
+            "Steam",
+            "battle.net.exe",
+            "origin.exe"
+        }},
         properties = { screen = 1, tag = "5" }
     },
     {
