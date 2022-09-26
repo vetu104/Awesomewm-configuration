@@ -1,5 +1,5 @@
 local awful = require("awful")
-local gtr = require("gears.timer")
+local gears = require("gears")
 
 local _M = {
     {
@@ -9,12 +9,16 @@ local _M = {
             focus     = awful.client.focus.filter,
             raise     = true,
             screen    = awful.screen.preferred,
-            placement = awful.placement.no_overlap+awful.placement.no_offscreen }
+            placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+        }
     },
     {
-        id = "titlebars_on",
+        id = "normal",
         rule_any = { type = { "normal", "dialog" }},
-        properties = { titlebars_enabled = true }
+        properties = {
+            titlebars_enabled = true,
+            shape = gears.shape.rounded_rect
+        },
     },
     {
         id = "titlebars_off",
@@ -54,11 +58,11 @@ local _M = {
         },
         properties = {
             floating = true,
-            placement = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen
+            placement = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen,
         }
     },
     {
-        id = "game_general",
+        id = "game",
         rule_any = {
             class = {
                 "wowclassic.exe",
@@ -71,29 +75,19 @@ local _M = {
         properties = {
             screen = 1,
             tag = "2",
-            titlebars_enabled = false
+            titlebars_enabled = false,
+            shape = gears.shape.rectangle
         },
         -- When a client starts up in fullscreen, resize it to cover the fullscreen a short moment later
         -- Fixes wrong geometry when titlebars are enabled
         -- (c) https://github.com/elenapan/
         callback = function(c)
-            gtr.delayed_call(function()
+            gears.timer.delayed_call(function()
                 if c.valid then
                     c:geometry(c.screen.geometry)
                 end
             end)
         end
-    },
-    {
-        id = "game_civ6",
-        rule = { class = "Civ6Sub" },
-        properties = {
-            screen = 1,
-            tag = "2",
-            fullscreen = false,
-            floating = false,
-            titlebars_enabled = false
-        }
     },
     {
         id = "chat",
