@@ -165,14 +165,16 @@ client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
     local buttons = {
         awful.button({ }, 1, function()
-            c:activate { context = "titlebar", action = "mouse_move"  }
+            c:activate({ context = "titlebar", action = "mouse_move" })
         end),
         awful.button({ }, 3, function()
-            c:activate { context = "titlebar", action = "mouse_resize"}
+            c:activate({ context = "titlebar", action = "mouse_resize" })
         end),
     }
-
-    awful.titlebar(c).widget = {
+    local tb = awful.titlebar(c, {
+    size = dpi(28)
+    })
+    tb.widget = {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
@@ -187,9 +189,9 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.minimizebutton(c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton(c),
+            wibox.container.margin(awful.titlebar.widget.ontopbutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
+            wibox.container.margin(awful.titlebar.widget.floatingbutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
+            wibox.container.margin(awful.titlebar.widget.closebutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
