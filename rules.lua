@@ -29,6 +29,8 @@ local _M = {
                 "battle.net.exe",
                 "io.github.celluloid_player.Celluloid",
                 "origin.exe",
+                "Xfce4-power-manager-settings",
+                "DayZ Launcher",
 
             }
         },
@@ -39,10 +41,24 @@ local _M = {
         rule_any = {
             instance = { "copyq", "pinentry" },
             class = {
-                "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv",
-                "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer",
-                "Galculator", "Thunar", "tsmapplication.exe", "Gedit",
-                "mpv", "io.github.celluloid_player.Celluloid", "feh", "Xarchiver", "origin.exe"
+                "Arandr",
+                "Blueman-manager",
+                "Gpick",
+                "Kruler",
+                "Sxiv",
+                "Tor Browser",
+                "Wpa_gui",
+                "veromix",
+                "xtightvncviewer",
+                "Galculator",
+                "Thunar",
+                "tsmapplication.exe",
+                "Gedit",
+                "mpv",
+                "io.github.celluloid_player.Celluloid",
+                "feh",
+                "Xarchiver",
+                "origin.exe",
             },
             name = {
                 "Event Tester",  -- xev.
