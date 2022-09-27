@@ -116,11 +116,26 @@ screen.connect_signal("request::desktop_decoration", function(s)
             s.mytasklist, -- Middle widget
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-                wibox.container.margin(widget.diskfree, dpi(4), dpi(4)),
-                wibox.container.margin(widget.cputemp, dpi(4), dpi(4)),
-                wibox.container.margin(widget.gputemp, dpi(4), dpi(4)),
-                wibox.container.margin(widget.sysload, dpi(4), dpi(4)),
-                wibox.container.margin(widget.clock, dpi(4), dpi(4)),
+                wibox.container.background(wibox.container.margin(
+                    widget.diskfree,
+                    dpi(18), dpi(18)),
+                    beautiful.bg_normal, gears.shape.powerline),
+                wibox.container.background(wibox.container.margin(
+                    widget.cputemp,
+                    dpi(18), dpi(18)),
+                    beautiful.fg_urgent, gears.shape.powerline),
+                wibox.container.background(wibox.container.margin(
+                    widget.gputemp,
+                    dpi(18), dpi(18)),
+                    beautiful.bg_normal, gears.shape.powerline),
+                wibox.container.background(wibox.container.margin(
+                    widget.sysload,
+                    dpi(18), dpi(18)),
+                    beautiful.fg_urgent, gears.shape.powerline),
+                wibox.container.background(wibox.container.margin(
+                    widget.clock,
+                    dpi(18), dpi(18)),
+                    beautiful.bg_normal, gears.shape.powerline),
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },
