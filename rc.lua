@@ -23,10 +23,30 @@ naughty.connect_signal("request::display_error", function(message, startup)
 end)
 -- }}}
 
+-- Colors
+x = {
+    nord0 = "#2E3440",
+    nord1 = "#3B4252",
+    nord2 = "#434C5E",
+    nord3 = "#4C566A",
+    nord4 = "#D8DEE9",
+    nord5 = "#E5E9F0",
+    nord6 = "#ECEFF4",
+    nord7 = "#8FBCBB",
+    nord8 = "#88C0D0",
+    nord9 = "#81A1C1",
+    nord10 = "#5E81AC",
+    nord11 = "#BF616A",
+    nord12 = "#D08770",
+    nord13 = "#EBCB8B",
+    nord14 = "#A3BE8C",
+    nord15 = "#B48EAD",
+}
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_xdg_config_home() .. "awesome/themes/default/theme.lua")
-terminal = "urxvt"
+local theme = "janecky"
+beautiful.init(gears.filesystem.get_xdg_config_home() .. "awesome/themes/" .. theme .. "/theme.lua")
+terminal = "st"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 -- }}}
@@ -119,23 +139,23 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 wibox.container.background(wibox.container.margin(
                     widget.diskfree,
                     dpi(18), dpi(18)),
-                    beautiful.bg_normal, gears.shape.powerline),
+                    x.nord11, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.cputemp,
                     dpi(18), dpi(18)),
-                    beautiful.fg_urgent, gears.shape.powerline),
+                    x.nord12, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.gputemp,
                     dpi(18), dpi(18)),
-                    beautiful.bg_normal, gears.shape.powerline),
+                    x.nord13, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.sysload,
                     dpi(18), dpi(18)),
-                    beautiful.fg_urgent, gears.shape.powerline),
+                    x.nord14, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.clock,
                     dpi(18), dpi(18)),
-                    beautiful.bg_normal, gears.shape.powerline),
+                    x.nord15, gears.shape.powerline),
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },

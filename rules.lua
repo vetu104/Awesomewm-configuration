@@ -30,9 +30,9 @@ local _M = {
                 "io.github.celluloid_player.Celluloid",
                 "origin.exe",
                 "Xfce4-power-manager-settings",
-                "DayZ Launcher",
 
-            }
+            },
+            name = { "DayZ Launcher", },
         },
         properties = { titlebars_enabled = false }
     },
