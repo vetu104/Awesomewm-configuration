@@ -24,24 +24,6 @@ end)
 -- }}}
 
 -- Colors
-x = {
-    nord0 = "#2E3440",
-    nord1 = "#3B4252",
-    nord2 = "#434C5E",
-    nord3 = "#4C566A",
-    nord4 = "#D8DEE9",
-    nord5 = "#E5E9F0",
-    nord6 = "#ECEFF4",
-    nord7 = "#8FBCBB",
-    nord8 = "#88C0D0",
-    nord9 = "#81A1C1",
-    nord10 = "#5E81AC",
-    nord11 = "#BF616A",
-    nord12 = "#D08770",
-    nord13 = "#EBCB8B",
-    nord14 = "#A3BE8C",
-    nord15 = "#B48EAD",
-}
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 local theme = "janecky"
@@ -133,29 +115,36 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 layout = wibox.layout.fixed.horizontal,
                 s.mytaglist,
             },
-            s.mytasklist, -- Middle widget
+            {-- Middle widget
+                layout = wibox.layout.fixed.horizontal,
+                wibox.container.background(wibox.container.constraint(
+                    s.mytasklist, 
+                    "exact",
+                    dpi(500)),
+                    beautiful.colors.nord0, gears.shape.rounded_rect)
+            },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 wibox.container.background(wibox.container.margin(
                     widget.diskfree,
                     dpi(18), dpi(18)),
-                    x.nord11, gears.shape.powerline),
+                    beautiful.colors.nord11, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.cputemp,
                     dpi(18), dpi(18)),
-                    x.nord12, gears.shape.powerline),
+                    beautiful.colors.nord12, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.gputemp,
                     dpi(18), dpi(18)),
-                    x.nord13, gears.shape.powerline),
+                    beautiful.colors.nord13, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.sysload,
                     dpi(18), dpi(18)),
-                    x.nord14, gears.shape.powerline),
+                    beautiful.colors.nord14, gears.shape.powerline),
                 wibox.container.background(wibox.container.margin(
                     widget.clock,
                     dpi(18), dpi(18)),
-                    x.nord15, gears.shape.powerline),
+                    beautiful.colors.nord15, gears.shape.powerline),
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },
@@ -211,8 +200,10 @@ client.connect_signal("request::titlebars", function(c)
     })
     tb.widget = {
         { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
+            wibox.container.margin(awful.titlebar.widget.closebutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
+            wibox.container.margin(awful.titlebar.widget.ontopbutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
+            wibox.container.margin(awful.titlebar.widget.floatingbutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
+            --awful.titlebar.widget.iconwidget(c),
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
@@ -224,10 +215,8 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            wibox.container.margin(awful.titlebar.widget.ontopbutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
-            wibox.container.margin(awful.titlebar.widget.floatingbutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
-            wibox.container.margin(awful.titlebar.widget.closebutton(c), dpi(6), dpi(6), dpi(6), dpi(6)),
-            layout = wibox.layout.fixed.horizontal()
+            buttons = buttons,
+            layout = wibox.layout.fixed.horizontal
         },
         layout = wibox.layout.align.horizontal
     }

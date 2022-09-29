@@ -14,24 +14,41 @@ local xrdb = beautiful.xresources.get_current_theme()
 
 local theme = {}
 
+theme.colors = {
+    nord0 = "#2E3440",
+    nord1 = "#3B4252",
+    nord2 = "#434C5E",
+    nord3 = "#4C566A",
+    nord4 = "#D8DEE9",
+    nord5 = "#E5E9F0",
+    nord6 = "#ECEFF4",
+    nord7 = "#8FBCBB",
+    nord8 = "#88C0D0",
+    nord9 = "#81A1C1",
+    nord10 = "#5E81AC",
+    nord11 = "#BF616A",
+    nord12 = "#D08770",
+    nord13 = "#EBCB8B",
+    nord14 = "#A3BE8C",
+    nord15 = "#B48EAD",
+}
+
 theme.font          = "sans 11"
 
---theme.bg_dark       = xrdb.background
-theme.bg_focus      = x.nord3
-theme.bg_normal     = x.nord1
-theme.bg_urgent     = x.nord11
-theme.bg_minimize   = x.nord1
-theme.bg_systray    = x.nord1
+theme.bg_focus      = theme.colors.nord3
+theme.bg_normal     = theme.colors.nord1
+theme.bg_urgent     = theme.colors.nord11
+theme.bg_minimize   = theme.colors.nord1
+theme.bg_systray    = theme.colors.nord1
+theme.fg_focus      = theme.colors.nord5
+theme.fg_normal     = theme.colors.nord4
+theme.fg_urgent     = theme.colors.nord6
+theme.fg_minimize   = theme.colors.nord4
 
-theme.fg_focus      = x.nord5
-theme.fg_normal     = x.nord4
-theme.fg_urgent     = x.nord6
-theme.fg_minimize   = x.nord4
-
-
---theme.border_color_normal = "#000000"
---theme.border_color_active = "#535d6c"
---theme.border_color_marked = "#91231c"
+theme.titlebar_bg_focus     = theme.colors.nord4
+theme.titlebar_bg_normal    = theme.colors.nord4
+theme.titlebar_fg_focus     = theme.colors.nord0
+theme.titlebar_fg_normal    = theme.colors.nord0
 
 theme.useless_gap         = dpi(10)
 theme.border_width        = dpi(0)
@@ -47,6 +64,7 @@ theme.border_width        = dpi(0)
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
+
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
@@ -76,39 +94,21 @@ theme.menu_width  = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.titlebar_close_button_normal = themes_path.."janecky/titlebar/redcircle.png"
 theme.titlebar_close_button_focus  = themes_path.."janecky/titlebar/redcircle.png"
+theme.titlebar_close_button_normal = themes_path.."janecky/titlebar/redcircle.png"
 
-theme.titlebar_floating_button_normal_inactive = themes_path.."janecky/titlebar/yellowcircle.png"
-theme.titlebar_floating_button_focus_inactive  = themes_path.."janecky/titlebar/yellowcircle.png"
-theme.titlebar_floating_button_normal_active = themes_path.."janecky/titlebar/yellowcircle.png"
-theme.titlebar_floating_button_focus_active  = themes_path.."janecky/titlebar/yellowcircle.png"
+theme.titlebar_ontop_button_focus_active  = themes_path.."janecky/titlebar/yellowcircle.png"
+theme.titlebar_ontop_button_normal_active = themes_path.."janecky/titlebar/yellowcircle.png"
+theme.titlebar_ontop_button_focus_inactive  = themes_path.."janecky/titlebar/graycircle.png"
+theme.titlebar_ontop_button_normal_inactive = themes_path.."janecky/titlebar/grayrcle.png"
 
-theme.titlebar_ontop_button_normal_inactive = themes_path.."janecky/titlebar/greencircle.png"
-theme.titlebar_ontop_button_focus_inactive  = themes_path.."janecky/titlebar/greencircle.png"
-theme.titlebar_ontop_button_normal_active = themes_path.."janecky/titlebar/greencircle.png"
-theme.titlebar_ontop_button_focus_active  = themes_path.."janecky/titlebar/greencircle.png"
+theme.titlebar_floating_button_focus_active  = themes_path.."janecky/titlebar/greencircle.png"
+theme.titlebar_floating_button_normal_active = themes_path.."janecky/titlebar/greencircle.png"
+theme.titlebar_floating_button_focus_inactive  = themes_path.."janecky/titlebar/graycircle.png"
+theme.titlebar_floating_button_normal_inactive = themes_path.."janecky/titlebar/graycircle.png"
 
---[[
-theme.titlebar_minimize_button_normal = themes_path.."janecky/titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus  = themes_path.."janecky/titlebar/minimize_focus.png"
---]]
-
---[[
-theme.titlebar_sticky_button_normal_inactive = themes_path.."janecky/titlebar/sticky_normal_inactive.png"
-theme.titlebar_sticky_button_focus_inactive  = themes_path.."janecky/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_active = themes_path.."janecky/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_active  = themes_path.."janecky/titlebar/sticky_focus_active.png"
---]]
-
---[[
-theme.titlebar_maximized_button_normal_inactive = themes_path.."janecky/titlebar/maximized_normal_inactive.png"
-theme.titlebar_maximized_button_focus_inactive  = themes_path.."janecky/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_active = themes_path.."janecky/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_active  = themes_path.."janecky/titlebar/maximized_focus_active.png"
---]]
-
-theme.wallpaper = gfs.get_random_file_from_dir(wallpapers_path, { "jpg", "png" }, true)
+--theme.wallpaper = gfs.get_random_file_from_dir(wallpapers_path, { "jpg", "png" }, true)
+theme.wallpaper = (wallpapers_path .. "0151.jpg")
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."janecky/layouts/fairhw.png"
