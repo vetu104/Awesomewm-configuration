@@ -1,12 +1,9 @@
 local gears = require("gears")
 local awful = require("awful")
-require("awful.autofocus")
-local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local ruled = require("ruled")
 require("awful.hotkeys_popup.keys")
---local lain = require("lain")
 local keys = require("keys") --custom
 local rules = require("rules") --custom
 local widget = require("widget") --custom
@@ -23,7 +20,6 @@ naughty.connect_signal("request::display_error", function(message, startup)
 end)
 -- }}}
 
--- Colors
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 local theme = "janecky"

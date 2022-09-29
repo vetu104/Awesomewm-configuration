@@ -84,7 +84,8 @@ local _M = {
                 "wowclassic.exe",
                 "wow.exe",
                 "etl",
-                "csgo_linux64"
+                "csgo_linux64",
+                "Civ6Sub",
             },
             name = { "^DayZ$" }
         },
