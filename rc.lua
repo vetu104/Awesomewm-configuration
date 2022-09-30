@@ -101,7 +101,7 @@ local cputempwidget_formatted = {
 local gputempwidget_formatted = {
     {
         {
-            widget = widget.cputemp,
+            widget = widget.gputemp,
         },
         left    = dpi(4),
         right   = dpi(4),
@@ -197,6 +197,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 sysloadwidget_formatted,
                 arrow(beautiful.colors.nord14, beautiful.colors.nord15),
                 clockwidget_formatted,
+                arrow(beautiful.colors.nord15, beautiful.colors.nord1),
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },
