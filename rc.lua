@@ -1,9 +1,11 @@
 local gears = require("gears")
 local awful = require("awful")
+require("awful.autofocus")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local ruled = require("ruled")
 require("awful.hotkeys_popup.keys")
+local wibox = require("wibox")
 local keys = require("keys") --custom
 local rules = require("rules") --custom
 local widget = require("widget") --custom
@@ -69,7 +71,73 @@ end)
 
 
 -- {{{ Wibar
--- Create a textclock widget
+local diskwidget_formatted = {
+    {
+        {
+            widget = widget.diskfree,
+        },
+        left    = dpi(18),
+        right   = dpi(18),
+        widget  = wibox.container.margin,
+    },
+    shape       = gears.shape.powerline,
+    bg          = beautiful.colors.nord11,
+    widget      = wibox.container.background,
+}
+local cputempwidget_formatted = {
+    {
+        {
+            widget = widget.cputemp,
+        },
+        left    = dpi(18),
+        right   = dpi(18),
+        widget  = wibox.container.margin,
+    },
+    shape       = gears.shape.powerline,
+    bg          = beautiful.colors.nord12,
+    widget      = wibox.container.background,
+}
+local gputempwidget_formatted = {
+    {
+        {
+            widget = widget.cputemp,
+        },
+        left    = dpi(18),
+        right   = dpi(18),
+        widget  = wibox.container.margin,
+    },
+    shape       = gears.shape.powerline,
+    bg          = beautiful.colors.nord13,
+    widget      = wibox.container.background,
+}
+local sysloadwidget_formatted = {
+    {
+        {
+            widget = widget.sysload,
+        },
+        left    = dpi(18),
+        right   = dpi(18),
+        widget  = wibox.container.margin,
+    },
+    shape       = gears.shape.powerline,
+    bg          = beautiful.colors.nord14,
+    widget      = wibox.container.background,
+}
+local clockwidget_formatted = {
+    {
+        {
+            widget = widget.clock,
+        },
+        left    = dpi(18),
+        right   = dpi(18),
+        widget  = wibox.container.margin,
+    },
+    shape       = gears.shape.powerline,
+    bg          = beautiful.colors.nord15,
+    widget      = wibox.container.background,
+}
+
+
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table. (NOT!)
     if s.index == 1 then
@@ -114,33 +182,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
             {-- Middle widget
                 layout = wibox.layout.fixed.horizontal,
                 wibox.container.background(wibox.container.constraint(
-                    s.mytasklist, 
+                    s.mytasklist,
                     "exact",
                     dpi(500)),
                     beautiful.colors.nord0, gears.shape.rounded_rect)
             },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-                wibox.container.background(wibox.container.margin(
-                    widget.diskfree,
-                    dpi(18), dpi(18)),
-                    beautiful.colors.nord11, gears.shape.powerline),
-                wibox.container.background(wibox.container.margin(
-                    widget.cputemp,
-                    dpi(18), dpi(18)),
-                    beautiful.colors.nord12, gears.shape.powerline),
-                wibox.container.background(wibox.container.margin(
-                    widget.gputemp,
-                    dpi(18), dpi(18)),
-                    beautiful.colors.nord13, gears.shape.powerline),
-                wibox.container.background(wibox.container.margin(
-                    widget.sysload,
-                    dpi(18), dpi(18)),
-                    beautiful.colors.nord14, gears.shape.powerline),
-                wibox.container.background(wibox.container.margin(
-                    widget.clock,
-                    dpi(18), dpi(18)),
-                    beautiful.colors.nord15, gears.shape.powerline),
+                diskwidget_formatted,
+                cputempwidget_formatted,
+                gputempwidget_formatted,
+                sysloadwidget_formatted,
+                clockwidget_formatted,
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },

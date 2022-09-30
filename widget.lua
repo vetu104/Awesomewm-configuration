@@ -40,12 +40,10 @@ _M.sysload = awful.widget.watch(
 
 -- Disk space widget
 _M.diskfree = awful.widget.watch(
-    --"sh -c 'df -h --output=avail /home | sed -r '1d;s/\\s+//g''", interval, function(widget, stdout)
     "df -h --output=avail /home", interval, function(widget, stdout)
         local out = stdout.match(stdout, "(%d+G)")
         out = out.format("<span foreground='%s' size='large'> df: %s </span>", beautiful.colors.nord0, out)
         widget:set_markup(out)
-    end
-)
+    end)
 
 return _M
