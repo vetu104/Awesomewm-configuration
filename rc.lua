@@ -10,6 +10,7 @@ local keys = require("keys") --custom
 local rules = require("rules") --custom
 local widget = require("widget") --custom
 local lain = require("lain")
+local colors = require("colors")
 
 local dpi = beautiful.xresources.apply_dpi
 
@@ -70,71 +71,8 @@ screen.connect_signal("request::wallpaper", function(s)
 end)
 -- }}}
 
-
 -- {{{ Wibar
 local arrow = lain.util.separators.arrow_left
-
-local diskwidget_formatted = {
-    {
-        {
-            widget = widget.diskfree,
-        },
-        left    = dpi(4),
-        right   = dpi(4),
-        widget  = wibox.container.margin,
-    },
-    bg          = beautiful.colors.nord11,
-    widget      = wibox.container.background,
-}
-local cputempwidget_formatted = {
-    {
-        {
-            widget = widget.cputemp,
-        },
-        left    = dpi(4),
-        right   = dpi(4),
-        widget  = wibox.container.margin,
-    },
-    bg          = beautiful.colors.nord12,
-    widget      = wibox.container.background,
-}
-local gputempwidget_formatted = {
-    {
-        {
-            widget = widget.gputemp,
-        },
-        left    = dpi(4),
-        right   = dpi(4),
-        widget  = wibox.container.margin,
-    },
-    bg          = beautiful.colors.nord13,
-    widget      = wibox.container.background,
-}
-local sysloadwidget_formatted = {
-    {
-        {
-            widget = widget.sysload,
-        },
-        left    = dpi(4),
-        right   = dpi(4),
-        widget  = wibox.container.margin,
-    },
-    bg          = beautiful.colors.nord14,
-    widget      = wibox.container.background,
-}
-local clockwidget_formatted = {
-    {
-        {
-            widget = widget.clock,
-        },
-        left    = dpi(4),
-        right   = dpi(4),
-        widget  = wibox.container.margin,
-    },
-    bg          = beautiful.colors.nord15,
-    widget      = wibox.container.background,
-}
-
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table. (NOT!)
@@ -183,21 +121,21 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     s.mytasklist,
                     "exact",
                     dpi(500)),
-                    beautiful.colors.nord0, gears.shape.rounded_rect)
+                    colors.color0, gears.shape.rounded_rect)
             },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-                arrow(beautiful.colors.nord1, beautiful.colors.nord11),
-                diskwidget_formatted,
-                arrow(beautiful.colors.nord11, beautiful.colors.nord12),
-                cputempwidget_formatted,
-                arrow(beautiful.colors.nord12, beautiful.colors.nord13),
-                gputempwidget_formatted,
-                arrow(beautiful.colors.nord13, beautiful.colors.nord14),
-                sysloadwidget_formatted,
-                arrow(beautiful.colors.nord14, beautiful.colors.nord15),
-                clockwidget_formatted,
-                arrow(beautiful.colors.nord15, beautiful.colors.nord1),
+                arrow(colors.color1, colors.color11),
+                widget.diskfree,
+                arrow(colors.color11, colors.color12),
+                widget.cputemp,
+                arrow(colors.color12, colors.color13),
+                widget.gputemp,
+                arrow(colors.color13, colors.color14),
+                widget.sysload,
+                arrow(colors.color14, colors.color15),
+                widget.clock,
+                arrow(colors.color15, colors.color1),
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },

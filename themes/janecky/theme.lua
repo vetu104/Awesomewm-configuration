@@ -1,8 +1,3 @@
----------------------------
--- Default awesome theme --
----------------------------
-
-local beautiful = require("beautiful")
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
@@ -10,45 +5,26 @@ local dpi = xresources.apply_dpi
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_xdg_config_home() .. "awesome/themes/"
 local wallpapers_path = gfs.get_xdg_data_home() .. "wallpapers/"
-local xrdb = beautiful.xresources.get_current_theme()
+local colors = require("colors")
 
 local theme = {}
 
-theme.colors = {
-    nord0 = "#2E3440",
-    nord1 = "#3B4252",
-    nord2 = "#434C5E",
-    nord3 = "#4C566A",
-    nord4 = "#D8DEE9",
-    nord5 = "#E5E9F0",
-    nord6 = "#ECEFF4",
-    nord7 = "#8FBCBB",
-    nord8 = "#88C0D0",
-    nord9 = "#81A1C1",
-    nord10 = "#5E81AC",
-    nord11 = "#BF616A",
-    nord12 = "#D08770",
-    nord13 = "#EBCB8B",
-    nord14 = "#A3BE8C",
-    nord15 = "#B48EAD",
-}
-
 theme.font          = "sans 11"
 
-theme.bg_focus      = theme.colors.nord3
-theme.bg_normal     = theme.colors.nord1
-theme.bg_urgent     = theme.colors.nord11
-theme.bg_minimize   = theme.colors.nord1
-theme.bg_systray    = theme.colors.nord1
-theme.fg_focus      = theme.colors.nord5
-theme.fg_normal     = theme.colors.nord4
-theme.fg_urgent     = theme.colors.nord6
-theme.fg_minimize   = theme.colors.nord4
+theme.bg_focus      = colors.color3
+theme.bg_normal     = colors.color1
+theme.bg_urgent     = colors.color11
+theme.bg_minimize   = colors.color1
+theme.bg_systray    = colors.color1
+theme.fg_focus      = colors.color5
+theme.fg_normal     = colors.color4
+theme.fg_urgent     = colors.color6
+theme.fg_minimize   = colors.color4
 
-theme.titlebar_bg_focus     = theme.colors.nord4
-theme.titlebar_bg_normal    = theme.colors.nord4
-theme.titlebar_fg_focus     = theme.colors.nord0
-theme.titlebar_fg_normal    = theme.colors.nord0
+theme.titlebar_bg_focus     = colors.color4
+theme.titlebar_bg_normal    = colors.color4
+theme.titlebar_fg_focus     = colors.color0
+theme.titlebar_fg_normal    = colors.color0
 
 theme.useless_gap         = dpi(10)
 theme.border_width        = dpi(0)
