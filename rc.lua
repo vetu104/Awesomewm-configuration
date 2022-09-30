@@ -9,6 +9,7 @@ local wibox = require("wibox")
 local keys = require("keys") --custom
 local rules = require("rules") --custom
 local widget = require("widget") --custom
+local lain = require("lain")
 
 local dpi = beautiful.xresources.apply_dpi
 
@@ -71,16 +72,17 @@ end)
 
 
 -- {{{ Wibar
+local arrow = lain.util.separators.arrow_left
+
 local diskwidget_formatted = {
     {
         {
             widget = widget.diskfree,
         },
-        left    = dpi(18),
-        right   = dpi(18),
+        left    = dpi(4),
+        right   = dpi(4),
         widget  = wibox.container.margin,
     },
-    shape       = gears.shape.powerline,
     bg          = beautiful.colors.nord11,
     widget      = wibox.container.background,
 }
@@ -89,11 +91,10 @@ local cputempwidget_formatted = {
         {
             widget = widget.cputemp,
         },
-        left    = dpi(18),
-        right   = dpi(18),
+        left    = dpi(4),
+        right   = dpi(4),
         widget  = wibox.container.margin,
     },
-    shape       = gears.shape.powerline,
     bg          = beautiful.colors.nord12,
     widget      = wibox.container.background,
 }
@@ -102,11 +103,10 @@ local gputempwidget_formatted = {
         {
             widget = widget.cputemp,
         },
-        left    = dpi(18),
-        right   = dpi(18),
+        left    = dpi(4),
+        right   = dpi(4),
         widget  = wibox.container.margin,
     },
-    shape       = gears.shape.powerline,
     bg          = beautiful.colors.nord13,
     widget      = wibox.container.background,
 }
@@ -115,11 +115,10 @@ local sysloadwidget_formatted = {
         {
             widget = widget.sysload,
         },
-        left    = dpi(18),
-        right   = dpi(18),
+        left    = dpi(4),
+        right   = dpi(4),
         widget  = wibox.container.margin,
     },
-    shape       = gears.shape.powerline,
     bg          = beautiful.colors.nord14,
     widget      = wibox.container.background,
 }
@@ -128,11 +127,10 @@ local clockwidget_formatted = {
         {
             widget = widget.clock,
         },
-        left    = dpi(18),
-        right   = dpi(18),
+        left    = dpi(4),
+        right   = dpi(4),
         widget  = wibox.container.margin,
     },
-    shape       = gears.shape.powerline,
     bg          = beautiful.colors.nord15,
     widget      = wibox.container.background,
 }
@@ -189,10 +187,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
             },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
+                arrow(beautiful.colors.nord1, beautiful.colors.nord11),
                 diskwidget_formatted,
+                arrow(beautiful.colors.nord11, beautiful.colors.nord12),
                 cputempwidget_formatted,
+                arrow(beautiful.colors.nord12, beautiful.colors.nord13),
                 gputempwidget_formatted,
+                arrow(beautiful.colors.nord13, beautiful.colors.nord14),
                 sysloadwidget_formatted,
+                arrow(beautiful.colors.nord14, beautiful.colors.nord15),
                 clockwidget_formatted,
                 wibox.widget.systray(),
                 s.mylayoutbox,
