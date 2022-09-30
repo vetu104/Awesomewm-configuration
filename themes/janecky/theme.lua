@@ -100,7 +100,7 @@ theme.titlebar_close_button_normal = themes_path.."janecky/titlebar/redcircle.pn
 theme.titlebar_ontop_button_focus_active  = themes_path.."janecky/titlebar/yellowcircle.png"
 theme.titlebar_ontop_button_normal_active = themes_path.."janecky/titlebar/yellowcircle.png"
 theme.titlebar_ontop_button_focus_inactive  = themes_path.."janecky/titlebar/graycircle.png"
-theme.titlebar_ontop_button_normal_inactive = themes_path.."janecky/titlebar/grayrcle.png"
+theme.titlebar_ontop_button_normal_inactive = themes_path.."janecky/titlebar/graycircle.png"
 
 theme.titlebar_floating_button_focus_active  = themes_path.."janecky/titlebar/greencircle.png"
 theme.titlebar_floating_button_normal_active = themes_path.."janecky/titlebar/greencircle.png"
