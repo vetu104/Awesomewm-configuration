@@ -1,8 +1,7 @@
 #!/bin/sh
 
 run() {
-  if ! pgrep -f "$1" > /dev/null ;
-  then
+    if  ! pgrep -f "$1" > /dev/null; then
     "$@"&
   fi
 }

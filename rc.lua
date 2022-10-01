@@ -99,13 +99,13 @@ screen.connect_signal("request::desktop_decoration", function(s)
         buttons = keys.taglistbuttons
     })
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
+    s.mytasklist = awful.widget.tasklist({
         screen   = s,
         filter   = awful.widget.tasklist.filter.currenttags,
         buttons  = keys.tasklistbuttons,
         style    = {
-            shape_border_width = 1,
-            shape_border_color = '#777777',
+            shape_border_width = dpi(1),
+            shape_border_color = colors.color4,
             shape  = gears.shape.rounded_bar,
         },
         layout   = {
@@ -146,7 +146,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             id     = 'background_role',
             widget = wibox.container.background,
     },
-}
+})
     -- Create the wibox
     s.mywibox = awful.wibar({
         position = "top",
@@ -159,11 +159,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             },
             {-- Middle widget
                 layout = wibox.layout.fixed.horizontal,
-                wibox.container.background(wibox.container.constraint(
-                    s.mytasklist,
-                    "exact",
-                    dpi(500)),
-                    colors.color0, gears.shape.rounded_rect)
+                s.mytasklist,
             },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
