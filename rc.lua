@@ -163,6 +163,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             },
             { -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
+                widget.mpd,
                 arrow(colors.color1, colors.color11),
                 widget.diskfree,
                 arrow(colors.color11, colors.color12),

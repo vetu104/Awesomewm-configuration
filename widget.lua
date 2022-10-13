@@ -3,6 +3,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 local colors = require("colors")
 local dpi = beautiful.xresources.apply_dpi
+local lain = require("lain")
 
 local _M = {}
 
@@ -100,5 +101,39 @@ _M.diskfree = {
     bg          = colors.color11,
     widget      = wibox.container.background,
 }
+
+--MPD
+--[[
+local musicplr = awful.util.terminal .. " -title Music -g 130x34-320+16 -e ncmpcpp"
+mpdicon:buttons(my_table.join(
+    awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
+    awful.button({ }, 1, function ()
+        os.execute("mpc prev")
+        theme.mpd.update()
+    end),
+    awful.button({ }, 2, function ()
+        os.execute("mpc toggle")
+        theme.mpd.update()
+    end),
+    awful.button({ }, 3, function ()
+        os.execute("mpc next")
+        theme.mpd.update()
+    end)))
+--]]
+_M.mpd = lain.widget.mpd({
+    settings = function()
+        if mpd_now.state == "play" then
+            artist = " " .. mpd_now.artist .. " "
+            title  = mpd_now.title  .. " "
+            --mpdicon:set_image(theme.widget_music_on)
+            widget:set_markup(lain.util.markup.font(awesome.font, lain.util.markup("#FF8466", artist) .. " " .. title))
+        elseif mpd_now.state == "pause" then
+            widget:set_markup(lain.util.markup.font(awesome.font, " mpd paused "))
+            --mpdicon:set_image(theme.widget_music_pause)
+        else
+            widget:set_text("")
+            --mpdicon:set_image(theme.widget_music)
+        end
+end})
 
 return _M
