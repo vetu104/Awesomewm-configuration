@@ -59,6 +59,7 @@ local _M = {
                 "feh",
                 "Xarchiver",
                 "origin.exe",
+        name = { "^DayZ$" },
             },
             name = {
                 "Event Tester",  -- xev.
@@ -82,12 +83,14 @@ local _M = {
         rule_any = {
             class = {
                 "wowclassic.exe",
-                "wow.exe",
                 "etl",
                 "csgo_linux64",
                 "Civ6Sub",
             },
-            name = { "^DayZ$" }
+            name = {
+                "^DayZ$",
+                "World of Warcraft",
+            }
         },
         properties = {
             screen = 1,

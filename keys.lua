@@ -42,19 +42,19 @@ _M.globalkeys = {
     end,
             { description = "restore minimized", group = "client" }),
     -- Media
-    awful.key({                     }, "XF86AudioRaiseVolume",  function() awful.spawn("spotify-volume.py raise") end,
+    awful.key({                     }, "XF86AudioRaiseVolume",  function() awful.spawn("mpc volume +5") end,
             { description="raise music volume", group="media" }),
-    awful.key({                     }, "XF86AudioLowerVolume",  function() awful.spawn("spotify-volume.py lower") end,
+    awful.key({                     }, "XF86AudioLowerVolume",  function() awful.spawn("mpc volume -5") end,
             { description = "lower music volume", group = "media" }),
     awful.key({                     },     "XF86AudioMute",     function()
         awful.spawn("pactl set-sink-mute 0 toggle")
     end,
             { description = "toggle mute", group = "media" }),
-    awful.key({                     },     "XF86AudioPlay",     function() awful.spawn("playerctl play-pause") end,
+    awful.key({                     },     "XF86AudioPlay",     function() awful.spawn("mpc toggle") end,
             { description = "pause media", group = "media" }),
-    awful.key({                     },     "XF86AudioNext",     function() awful.spawn("playerctl next") end,
+    awful.key({                     },     "XF86AudioNext",     function() awful.spawn("mpc next") end,
             { description = "next media item", group = "media" } ),
-    awful.key({                     },     "XF86AudioPrev",     function() awful.spawn("playerctl previous") end,
+    awful.key({                     },     "XF86AudioPrev",     function() awful.spawn("mpc prev") end,
             { description = "previous media item", group = "media" }),
     awful.key({                     },         "Print",         function()
         awful.spawn.with_shell("scrot -s ~/Pictures/Screenshots/%Y-%m-%dT%H:%M:%S-screenshot.png")

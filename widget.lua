@@ -87,9 +87,9 @@ _M.diskfree = {
     {
         {
             widget = awful.widget.watch(
-                "df -h --output=avail /home", interval, function(widget, stdout)
-                    local out = stdout.match(stdout, "(%d+G)")
-                    out = out.format("<span foreground='%s' size='large'> df: %s </span>", colors.color0, out)
+                "df -h --output=avail /home /media/hdd0", interval, function(widget, stdout)
+                    local hd0,hd1 = stdout.match(stdout, "(%d+G)%s+(%d+G)")
+                    local out = string.format("<span foreground='%s' size='large'> sdd: %s hdd: %s </span>", colors.color0, hd0, hd1)
                     widget:set_markup(out)
                 end)
         },
