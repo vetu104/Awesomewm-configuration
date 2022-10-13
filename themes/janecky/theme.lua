@@ -41,6 +41,9 @@ theme.border_width        = dpi(0)
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
 
+theme.hotkeys_bg = colors.color3
+theme.hotkeys_modifiers_fg = colors.color7
+
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
