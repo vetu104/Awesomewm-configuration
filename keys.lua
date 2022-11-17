@@ -16,6 +16,8 @@ _M.globalkeys = {
             { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey              },          "d",            function() awful.spawn("rofi -show drun") end,
             { description = "open rofi", group = "launcher" }),
+    awful.key({ modkey              },          "e",            function() awful.spawn("alacritty --class ncmpcpp -e ncmpcpp") end,
+            { description = "open ncmpcpp", group = "launcher" }),
     -- Focus manipulation
     awful.key({ modkey              },          "j",            function() awful.client.focus.byidx(1) end,
             { description = "focus next by index", group = "client" }),
@@ -42,19 +44,19 @@ _M.globalkeys = {
     end,
             { description = "restore minimized", group = "client" }),
     -- Media
-    awful.key({                     }, "XF86AudioRaiseVolume",  function() awful.spawn("mpc volume +5") end,
+    awful.key({                     }, "XF86AudioRaiseVolume",  function() awful.spawn("mpc volume +5", false) end,
             { description="raise music volume", group="media" }),
-    awful.key({                     }, "XF86AudioLowerVolume",  function() awful.spawn("mpc volume -5") end,
+    awful.key({                     }, "XF86AudioLowerVolume",  function() awful.spawn("mpc volume -5", false) end,
             { description = "lower music volume", group = "media" }),
     awful.key({                     },     "XF86AudioMute",     function()
         awful.spawn("pactl set-sink-mute 0 toggle")
     end,
             { description = "toggle mute", group = "media" }),
-    awful.key({                     },     "XF86AudioPlay",     function() awful.spawn("mpc toggle") end,
+    awful.key({                     },     "XF86AudioPlay",     function() awful.spawn("mpc toggle", false) end,
             { description = "pause media", group = "media" }),
-    awful.key({                     },     "XF86AudioNext",     function() awful.spawn("mpc next") end,
+    awful.key({                     },     "XF86AudioNext",     function() awful.spawn("mpc next", false) end,
             { description = "next media item", group = "media" } ),
-    awful.key({                     },     "XF86AudioPrev",     function() awful.spawn("mpc prev") end,
+    awful.key({                     },     "XF86AudioPrev",     function() awful.spawn("mpc prev", false) end,
             { description = "previous media item", group = "media" }),
     awful.key({                     },         "Print",         function()
         awful.spawn.with_shell("scrot -s ~/Pictures/Screenshots/%Y-%m-%dT%H:%M:%S-screenshot.png")

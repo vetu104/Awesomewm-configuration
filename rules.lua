@@ -56,9 +56,9 @@ local _M = {
                 "Gedit",
                 "mpv",
                 "io.github.celluloid_player.Celluloid",
-                "feh",
                 "Xarchiver",
                 "origin.exe",
+                "ncmpcpp",
         name = { "^DayZ$" },
             },
             name = {
@@ -76,6 +76,17 @@ local _M = {
         properties = {
             floating = true,
             placement = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen,
+        }
+    },
+    {
+        id = "fullscreen",
+        rule_any = { class = { "tesv.exe" }},
+        properties = {
+            screen = 1,
+            tag = "2",
+            floating = true,
+            fullscreen = true,
+            titlebars_enabled = false,
         }
     },
     {
