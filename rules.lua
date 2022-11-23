@@ -80,7 +80,12 @@ local _M = {
     },
     {
         id = "fullscreen",
-        rule_any = { class = { "tesv.exe" }},
+        rule_any = {
+            class = {
+                "tesv.exe",
+                "wowclassic.exe"
+            }
+        },
         properties = {
             screen = 1,
             tag = "2",
