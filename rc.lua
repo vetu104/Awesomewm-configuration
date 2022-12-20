@@ -13,6 +13,8 @@ local lain = require("lain")
 local colors = require("colors")
 local dpi = beautiful.xresources.apply_dpi
 
+laptopmode = os.getenv("AWESOME_LAPTOP")
+
 -- {{{ Error handling
 naughty.connect_signal("request::display_error", function(message, startup)
     naughty.notification {
@@ -274,3 +276,19 @@ end)
 client.connect_signal("mouse::enter", function(c)
     c:activate({ context = "mouse_enter", raise = false })
 end)
+
+if laptopmode then
+    awful.keyboard.append_global_keybindings({
+    awful.key({                     }, "XF86AudioRaiseVolume",  function() awful.spawn("pactl set-sink-volume 0 +5%", false) end,
+            { description="raise music volume", group="media" }),
+    awful.key({                     }, "XF86AudioLowerVolume",  function() awful.spawn("pactl set-sink-volume 0 -5%", false) end,
+            { description = "lower music volume", group = "media" })
+    })
+else
+    awful.keyboard.append_global_keybindings({
+        awful.key({                     }, "XF86AudioRaiseVolume",  function() awful.spawn("mpc volume +5", false) end,
+                { description="raise music volume", group="media" }),
+        awful.key({                     }, "XF86AudioLowerVolume",  function() awful.spawn("mpc volume -5", false) end,
+                { description = "lower music volume", group = "media" }),
+    })
+end

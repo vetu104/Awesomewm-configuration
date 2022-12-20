@@ -44,10 +44,7 @@ _M.globalkeys = {
     end,
             { description = "restore minimized", group = "client" }),
     -- Media
-    awful.key({                     }, "XF86AudioRaiseVolume",  function() awful.spawn("mpc volume +5", false) end,
-            { description="raise music volume", group="media" }),
-    awful.key({                     }, "XF86AudioLowerVolume",  function() awful.spawn("mpc volume -5", false) end,
-            { description = "lower music volume", group = "media" }),
+
     awful.key({                     },     "XF86AudioMute",     function()
         awful.spawn("pactl set-sink-mute 0 toggle")
     end,
