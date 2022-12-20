@@ -80,12 +80,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
     elseif s.index == 2 then
         awful.tag.add("9", {
             screen = s,
-            layout = awful.layout.layouts[1],
+            layout = awful.layout.layouts[2],
             selected = true
         })
         awful.tag.add("10", {
             screen = s,
-            layout = awful.layout.layouts[1]
+            layout = awful.layout.layouts[2]
         })
     end
     s.mylayoutbox = awful.widget.layoutbox({

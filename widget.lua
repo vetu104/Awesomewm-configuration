@@ -31,7 +31,7 @@ _M.cputemp = {
     {
         {
             widget = awful.widget.watch(
-                "sensors -u", interval, function(widget, stdout)
+                "sensors -u coretemp-isa-0000", interval, function(widget, stdout)
                     local out = stdout.match(stdout, "temp1_input: (%d+)%.")
                     out = out.format("<span foreground='%s' size='large'> cpu: %dc </span>", colors.color0, out)
                     widget:set_markup(out)
@@ -50,9 +50,9 @@ _M.gputemp = {
     {
         {
             widget = awful.widget.watch(
-                "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader", interval, function(widget, stdout)
-                    local out = stdout.format(
-                        "<span foreground='%s' size='large'> gpu: %dc </span>", colors.color0, stdout)
+                "sensors -u amdgpu-pci-0300", interval, function(widget, stdout)
+                    local out = stdout.match(stdout, "temp1_input: (%d+)%.")
+                    out = out.format("<span foreground='%s' size='large'> gpu: %dc </span>", colors.color0, out)
                     widget:set_markup(out)
                 end)
         },

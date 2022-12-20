@@ -58,7 +58,7 @@ _M.globalkeys = {
             { description = "next media item", group = "media" } ),
     awful.key({                     },     "XF86AudioPrev",     function() awful.spawn("mpc prev", false) end,
             { description = "previous media item", group = "media" }),
-    awful.key({                     },         "Print",         function()
+    awful.key({ modkey              },         "Print",         function()
         awful.spawn.with_shell("scrot -s ~/Pictures/Screenshots/%Y-%m-%dT%H:%M:%S-screenshot.png")
     end,
             { description = "take a screenshot", group = "media" }),

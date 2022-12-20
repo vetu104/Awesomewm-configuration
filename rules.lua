@@ -106,6 +106,7 @@ local _M = {
             name = {
                 "^DayZ$",
                 "World of Warcraft",
+                "Sid Meier's Civilization VI (DX11)",
             }
         },
         properties = {

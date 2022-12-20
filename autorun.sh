@@ -6,7 +6,6 @@ run() {
   fi
 }
 
-run nvidia-settings -l --config='/home/janne/.config/nvidia/settings'
 run picom
 run xfce4-power-manager
 run numlockx
